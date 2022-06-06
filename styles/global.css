@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: Tungsten;
+  font-family: TungstenBold;
   src: url('/public/fonts/Tungsten-Bold.ttf');
 }
