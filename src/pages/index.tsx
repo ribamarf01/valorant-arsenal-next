@@ -1,7 +1,21 @@
+import Head from 'next/head'
+
 const Home = () => {
 
   return (<>
-    <h1>Hello world</h1>
+
+    <Head>
+      <title>Valorant arsenal maker</title>
+    </Head>
+
+    {/* Yours name arsenal */}
+
+    {/* Weapons */}
+    <div className='flex w-full'>
+
+    </div>
+
+
   </>)
 
 }

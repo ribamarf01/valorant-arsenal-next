@@ -3,7 +3,14 @@ module.exports = {
     "src/**/*.tsx"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'valorant-bg': "url('/img/valorant-background.jpg')"
+      },
+      fontFamily: {
+        'tungsten': ['TungstenBold', 'Arial', 'Helvetica']
+      }
+    },
   },
   plugins: [],
 }
