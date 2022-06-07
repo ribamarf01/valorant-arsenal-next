@@ -3,6 +3,11 @@ import { useState } from 'react'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
 
+import WeaponSkinContainer from '../components/WeaponSkinContainer'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+
 interface Weapon {
   uuid: string
   displayName: string
@@ -39,11 +44,26 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
     <div className="flex flex-col h-screen justify-between items-center py-5">
       <h1 className='text-yellow-200 text-center text-5xl font-semibold tracking-wider'>{displayName}</h1>
 
-      <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for the ${selectedSkin.displayName}`} />
+      <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for ${selectedSkin.displayName}`} />
 
       <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
 
       {/* <button onClick={e => changeSkin(skins[0])}>Change to glitch odin</button> */}
+
+      {/* <Swiper
+        className='w-full'
+        spaceBetween={2}
+        slidesPerView={3}
+
+      >
+        
+      </Swiper> */}
+
+      <WeaponSkinContainer
+        uuid={uuid}
+        displayName={displayName}
+        displayIcon={displayIcon}
+      />
 
     </div>
     
