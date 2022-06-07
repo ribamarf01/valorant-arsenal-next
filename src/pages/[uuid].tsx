@@ -22,7 +22,7 @@ interface WeaponSkin {
   displayIcon?: string
 }
 
-const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins }}) => {
+const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins } }) => {
 
   const defaultWeaponSkin: WeaponSkin = {
     uuid: defaultSkinUuid,
@@ -35,7 +35,7 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
   const changeSkin = (skin: WeaponSkin): void => {
     skin.uuid === defaultSkinUuid ? setSelectedSkin(defaultWeaponSkin) : setSelectedSkin(skin)
   }
-  
+
   return (<>
     <Head>
       <title>Picking {displayName} skin</title>
@@ -46,27 +46,36 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
 
       <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for ${selectedSkin.displayName}`} />
 
-      <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
+      <div className='flex flex-col items-center w-full'>
+        <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
 
-      {/* <button onClick={e => changeSkin(skins[0])}>Change to glitch odin</button> */}
+        {/* <button onClick={e => changeSkin(skins[0])}>Change to glitch odin</button> */}
 
-      {/* <Swiper
-        className='w-full'
-        spaceBetween={2}
-        slidesPerView={3}
+        <Swiper
+          className='w-full my-6'
+          spaceBetween={4}
+          slidesPerView={7}
+          loop={true}
+        >
+          {
+            skins.map((skin, index) => (
+              <SwiperSlide onClick={e => changeSkin(skins[index])}>
+                <WeaponSkinContainer
+                  uuid={skin.uuid}
+                  displayName={skin.displayName}
+                  displayIcon={skin.displayIcon}
+                />
+              </SwiperSlide>
+            ))
+          }
 
-      >
+        </Swiper>
+
         
-      </Swiper> */}
-
-      <WeaponSkinContainer
-        uuid={uuid}
-        displayName={displayName}
-        displayIcon={displayIcon}
-      />
+      </div>
 
     </div>
-    
+
   </>)
 
 }

@@ -4,11 +4,12 @@ interface WeaponSkin {
   uuid?: string
   displayName: string
   displayIcon: string
+  active?: boolean
 }
 
-const WeaponSkinContainer: FC<WeaponSkin> = ({ displayName, displayIcon }) => {
+const WeaponSkinContainer: FC<WeaponSkin> = ({ uuid, displayName, displayIcon, active }) => {
   return (<>
-    <div className='w-[8.375rem] h-[8.375rem] relative overflow-hidden border border-yellow-300 flex items-center justify-center'>
+    <div className={`w-[8.375rem] h-[8.375rem] relative overflow-hidden  flex items-center justify-center ${active ? 'border border-yellow-300': ''}`}>
       <div className='w-32 h-32 absolute border-blue-300 border-2'>
         <img className='w-32 h-32 object-cover object-center' src={displayIcon} alt={`Image for ${displayName}`} />
       </div>
