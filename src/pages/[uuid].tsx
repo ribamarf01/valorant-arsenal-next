@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
@@ -22,7 +22,7 @@ interface WeaponSkin {
   displayIcon?: string
 }
 
-const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins } }) => {
+const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins }, initialSlide}) => {
 
   const defaultWeaponSkin: WeaponSkin = {
     uuid: defaultSkinUuid,
@@ -49,17 +49,17 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
       <div className='flex flex-col items-center w-full'>
         <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
 
-        {/* <button onClick={e => changeSkin(skins[0])}>Change to glitch odin</button> */}
-
         <Swiper
-          className='w-full my-6'
+          className='w-10/12 my-6 px-6'
           spaceBetween={4}
-          slidesPerView={7}
+          slidesPerView={11}
+          initialSlide={initialSlide}
           loop={true}
+          centeredSlides={true}
         >
           {
             skins.map((skin, index) => (
-              <SwiperSlide onClick={e => changeSkin(skins[index])}>
+              <SwiperSlide key={index} onClick={e => changeSkin(skins[index])}>
                 <WeaponSkinContainer
                   uuid={skin.uuid}
                   displayName={skin.displayName}
@@ -68,10 +68,8 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
               </SwiperSlide>
             ))
           }
-
         </Swiper>
 
-        
       </div>
 
     </div>
@@ -103,11 +101,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const res = await fetch(`https://valorant-api.com/v1/weapons/${params.uuid}`)
   const { data } = await res.json()
 
-  const skins = data.skins.map(skin => ({
-    uuid: skin.uuid,
-    displayName: skin.displayName,
-    displayIcon: skin.displayIcon
-  } as WeaponSkin))
+  let initialSlide
+
+  const skins = data.skins.map((skin, index) => {
+    
+    if (skin.uuid === data.defaultSkinUuid) initialSlide = index
+
+    return {
+      uuid: skin.uuid,
+      displayName: skin.displayName,
+      displayIcon: skin.displayIcon
+    } as WeaponSkin
+  })
 
   const info: Weapon = {
     uuid: data.uuid,
@@ -119,7 +124,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      info
+      info,
+      initialSlide
     }
   }
 
