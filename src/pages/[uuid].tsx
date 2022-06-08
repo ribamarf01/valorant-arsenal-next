@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
@@ -50,12 +50,14 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
         <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
 
         <Swiper
-          className='w-10/12 my-6 px-6'
+          className='w-10/12 my-6 px-6 select-none'
           spaceBetween={4}
           slidesPerView={11}
           initialSlide={initialSlide}
+          allowTouchMove={false}
           loop={true}
           centeredSlides={true}
+          slideToClickedSlide={true}
         >
           {
             skins.map((skin, index) => (
