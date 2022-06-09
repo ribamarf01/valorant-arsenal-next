@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import WeaponSkinContainer from '../components/WeaponSkinContainer'
 
@@ -42,7 +43,13 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
     </Head>
 
     <div className="flex flex-col h-screen justify-between items-center py-5 uppercase">
-      <h1 className='text-yellow-200 text-center text-7xl font-tungsten tracking-wider'>{displayName}</h1>
+      
+      {/* Lazy... */}
+      <div className='flex items-center justify-between w-full px-12'>
+        <Link href="/"><span className='text-white text-3xl font-tungsten tracking-wide cursor-pointer hover:text-gray-300 duration-200 transition-all'>Back</span></Link>
+        <h1 className='text-yellow-200 text-7xl font-tungsten tracking-wider'>{displayName}</h1>
+        <span className='invisible'>nothing</span>
+      </div>
 
       <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for ${selectedSkin.displayName}`} />
 
