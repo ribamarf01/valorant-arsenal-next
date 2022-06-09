@@ -4,5 +4,10 @@
 
 @font-face {
   font-family: TungstenBold;
-  src: url('/public/fonts/Tungsten-Bold.ttf');
+  src: url('/fonts/Tungsten-Bold.ttf');
+}
+
+@font-face {
+  font-family: TungstenSemibold;
+  src: url('/fonts/TungstenNarrow-Semibold.ttf')
 }

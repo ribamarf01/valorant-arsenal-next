@@ -41,13 +41,13 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
       <title>Picking {displayName} skin</title>
     </Head>
 
-    <div className="flex flex-col h-screen justify-between items-center py-5">
-      <h1 className='text-yellow-200 text-center text-5xl font-semibold tracking-wider'>{displayName}</h1>
+    <div className="flex flex-col h-screen justify-between items-center py-5 uppercase">
+      <h1 className='text-yellow-200 text-center text-7xl font-tungsten tracking-wider'>{displayName}</h1>
 
       <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for ${selectedSkin.displayName}`} />
 
       <div className='flex flex-col items-center w-full'>
-        <h1 className='text-gray-200 text-center text-5xl'>{selectedSkin.displayName}</h1>
+        <h1 className='text-gray-200 font-light tracking-tight text-center text-5xl'>{selectedSkin.displayName}</h1>
 
         <Swiper
           className='w-10/12 my-6 px-6 select-none'
@@ -106,13 +106,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let initialSlide
 
   const skins = data.skins.map((skin, index) => {
+
+    let displayIcon = skin.displayIcon !== null ? skin.displayIcon : skin.chromas[0].displayIcon
     
-    if (skin.uuid === data.defaultSkinUuid) initialSlide = index
+    if (skin.uuid === data.defaultSkinUuid) {
+      initialSlide = index
+      displayIcon = data.displayIcon
+    }
 
     return {
       uuid: skin.uuid,
       displayName: skin.displayName,
-      displayIcon: skin.displayIcon
+      displayIcon
     } as WeaponSkin
   })
 

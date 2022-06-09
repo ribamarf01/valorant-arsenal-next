@@ -54,11 +54,11 @@ const Home = () => {
       <div className="flex flex-col items-center">
         <div className="flex flex-col">
           <h1 className="tracking-widest text-xl text-white py-1 font-tungsten text-center">Sniper Rifles</h1>
-          <HeavyGun className="mb-6 font-tungsten" name="Marshal" uuid="c4883e50-4494-202c-3ec3-6b8a9284f00b" />
+          <HeavyGun className="mb-6" name="Marshal" uuid="c4883e50-4494-202c-3ec3-6b8a9284f00b" />
           <HeavyGun name="Operator" uuid="a03b24d3-4319-996d-0f8c-94bbfba1dfc7" />
 
           <h1 className="tracking-widest text-xl text-white py-1 font-tungsten flex justify-center items-center h-6">Machine guns</h1>
-          <HeavyGun className="mb-6 font-tungsten" name="Ares" uuid="55d8a0f4-4274-ca67-fe2c-06ab45efdf58" />
+          <HeavyGun className="mb-6" name="Ares" uuid="55d8a0f4-4274-ca67-fe2c-06ab45efdf58" />
           <HeavyGun name="Odin" uuid="63e6c2b6-4a8e-869c-3d4c-e38355226584" />
           
           <h1 className="tracking-widest text-xl text-white py-1 font-tungsten flex justify-center items-center h-6">Melee</h1>
