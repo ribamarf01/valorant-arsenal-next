@@ -16,8 +16,9 @@ const Home = () => {
     {/* Yours name arsenal */}
 
     {/* Weapons */}
-    <div className='flex w-full min-h-full justify-center uppercase gap-x-8'>
+    <div className='flex items-center justify-center uppercase h-screen'>
 
+      <div className='flex gap-8'>
       <div className='flex flex-col items-center'>
         <h1 className='tracking-widest text-xl text-white py-1 font-tungsten'>Sidearm</h1>
         <div className='flex flex-col gap-6'>
@@ -63,6 +64,7 @@ const Home = () => {
           <h1 className="tracking-widest text-xl text-white py-1 font-tungsten flex justify-center items-center h-6">Melee</h1>
           <HeavyGun name="Melee" uuid="2f59173c-4bed-b6c3-2191-dea9b58be9c7" />
         </div>
+      </div>
       </div>
 
     </div>
