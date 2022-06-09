@@ -1,16 +1,11 @@
 import Head from 'next/head'
 
-import { useDispatch } from 'react-redux'
-import { changeEquipedSkin } from '../store/equiped/equipedWeaponsSlice'
-
 import EcoGun from '../components/EcoGun'
 import HeavyGun from '../components/HeavyGun'
 import RifleGun from '../components/RifleGun'
 import SmallGun from '../components/SmallGun'
 
 const Home = () => {
-
-  const dispatch = useDispatch()
 
   return (<>
 

@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
+
 interface GunProps {
   uuid: string
   name: string
@@ -10,10 +13,14 @@ interface GunProps {
 const RifleGun: FC<GunProps> = ({ uuid, name }) => {
 
   const [imageUrl, setImageUrl] = useState<string>("")
+  const selectedSkin = useSelector((state: RootState) => state.equipedWeapons[name])
 
   useEffect(() => {
     const newImageUrl = `https://media.valorant-api.com/weapons/${uuid}/displayicon.png`
-    setImageUrl(newImageUrl)
+
+    const settedSkin = selectedSkin === "" ? newImageUrl : selectedSkin
+
+    setImageUrl(settedSkin)
   }, [])
 
   return (<>

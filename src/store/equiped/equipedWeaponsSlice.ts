@@ -50,7 +50,7 @@ export const equipedWeaponsSlide = createSlice({
       const { key, value } = action.payload
       state[key] = value
 
-      console.log(`equiped ${key} to ${value}`)
+      console.log(`equiped ${key} to ${value}. state: ${state}`)
 
     }
   }
