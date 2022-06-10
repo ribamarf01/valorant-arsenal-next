@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../store'
 import { changeEquipedSkin } from '../store/equiped/equipedWeaponsSlice'
 
 import { GetStaticProps, GetStaticPaths } from 'next'
@@ -27,7 +28,7 @@ interface WeaponSkin {
 }
 
 const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins }, initialSlide }) => {
-
+  
   const defaultWeaponSkin: WeaponSkin = {
     uuid: defaultSkinUuid,
     displayName: `Standard ${displayName}`,
@@ -35,7 +36,18 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
   }
 
   const [selectedSkin, setSelectedSkin] = useState<WeaponSkin>(defaultWeaponSkin)
+  const [initialSlidePlace, setInitialSlidePlace] = useState<number>(initialSlide)
   const dispatch = useDispatch()
+  const equipedSkin = useSelector((state: RootState) => state.equipedWeapons[displayName])
+
+  useEffect(() => {
+    const actualEquipedSkinIndex = skins.findIndex(skin => equipedSkin === skin.displayIcon)
+
+    if(actualEquipedSkinIndex === -1) return
+
+    setSelectedSkin(skins[actualEquipedSkinIndex])
+    setInitialSlidePlace(actualEquipedSkinIndex)
+  }, [])
 
   const changeSkin = (skin: WeaponSkin): void => {
     skin.uuid === defaultSkinUuid ? setSelectedSkin(defaultWeaponSkin) : setSelectedSkin(skin)
@@ -63,7 +75,7 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
           <h1 className='text-gray-200 font-light tracking-tight text-center text-5xl'>{selectedSkin.displayName}</h1>
           <button 
             onClick={() => dispatch(changeEquipedSkin({ key: displayName, value: selectedSkin.displayIcon })) }
-            className='text-white bg-green-500 h-16 w-64 text-xl uppercase hover:bg-green-600 cursor-pointer duration-300 transition-all'
+            className={`text-white bg-green-500 h-16 w-64 text-xl uppercase hover:bg-green-600 cursor-pointer duration-300 transition-all`}
           >
             Equip skin
           </button>
@@ -73,7 +85,7 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
           className='w-10/12 my-6 px-6 select-none'
           spaceBetween={4}
           slidesPerView={11}
-          initialSlide={initialSlide}
+          initialSlide={initialSlidePlace}
           allowTouchMove={false}
           loop={true}
           centeredSlides={true}
