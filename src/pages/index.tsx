@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 
 import EcoGun from '../components/EcoGun'
 import HeavyGun from '../components/HeavyGun'
@@ -67,6 +68,15 @@ const Home = () => {
         </div>
       </div>
 
+    </div>
+
+    <div className='absolute top-5 left-5'>
+      <Image
+        className='invert'
+        src={'/img/camera.png'}
+        width={32}
+        height={32}
+      />
     </div>
 
 
