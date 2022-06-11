@@ -41,6 +41,7 @@ const Layout = ({ children }) => {
           src={'/img/camera.png'}
           width={32}
           height={32}
+          alt={'Button to take screenshot'}
         />
       </div>
     </div>

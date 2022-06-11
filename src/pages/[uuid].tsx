@@ -15,7 +15,7 @@ import { Swiper as SwiperMain, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
 interface Weapon {
-  uuid: string
+  uuid?: string
   displayName: string
   defaultSkinUuid: string
   displayIcon: string
@@ -28,7 +28,7 @@ interface WeaponSkin {
   displayIcon?: string
 }
 
-const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, skins }, initialSlide }) => {
+const SkinPicker = ({ info: { displayName, defaultSkinUuid, displayIcon, skins }, initialSlide }) => {
   
   const defaultWeaponSkin: WeaponSkin = {
     uuid: defaultSkinUuid,

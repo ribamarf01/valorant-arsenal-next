@@ -26,7 +26,7 @@ const EcoGun: FC<GunProps> = ({ uuid, name, className }) => {
   return (<>
     <Link href={`/${uuid}`}>
       <div className={`flex flex-col items-center h-36 w-72 bg-gray-200 bg-opacity-25 hover:cursor-pointer group ${className ? className : ''}`}>
-        <img className='px-4 my-auto' src={imageUrl} />
+        <img className='px-4 my-auto' src={imageUrl} alt={name} />
         <p className='bg-gray-400 font-tungstenNarrow bg-opacity-80 w-full text-center text-white text-sm font-bold duration-500 group-hover:bg-amber-300'>{ name }</p>
       </div>
     </Link>
