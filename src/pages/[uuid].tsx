@@ -10,7 +10,8 @@ import Link from 'next/link'
 
 import WeaponSkinContainer from '../components/WeaponSkinContainer'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore from 'swiper'
+import { Swiper as SwiperMain, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
 interface Weapon {
@@ -36,7 +37,17 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
   }
 
   const [selectedSkin, setSelectedSkin] = useState<WeaponSkin>(defaultWeaponSkin)
-  const [initialSlidePlace, setInitialSlidePlace] = useState<number>(initialSlide)
+  const [startSlideAt, setStartSlideAt] = useState<number>(initialSlide)
+
+  const swiperRef = useRef<SwiperCore>()
+
+  const setStates = (skin: WeaponSkin, index: number) => {
+    setSelectedSkin(skin)
+    setStartSlideAt(index)
+
+    swiperRef.current.slideToLoop(index)
+  }
+
   const dispatch = useDispatch()
   const equipedSkin = useSelector((state: RootState) => state.equipedWeapons[displayName])
 
@@ -44,9 +55,9 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
     const actualEquipedSkinIndex = skins.findIndex(skin => equipedSkin === skin.displayIcon)
 
     if(actualEquipedSkinIndex === -1) return
+    setStates(skins[actualEquipedSkinIndex], actualEquipedSkinIndex)
 
-    setSelectedSkin(skins[actualEquipedSkinIndex])
-    setInitialSlidePlace(actualEquipedSkinIndex)
+    return () => {}
   }, [])
 
   const changeSkin = (skin: WeaponSkin): void => {
@@ -62,16 +73,16 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
 
       {/* Lazy... */}
       <div className='flex items-center justify-between w-full px-12'>
-        <Link href="/"><span className='text-white text-3xl font-tungsten tracking-wide cursor-pointer hover:text-gray-300 duration-300 transition-all'>Back</span></Link>
-        <h1 className='text-yellow-300 text-7xl font-tungsten tracking-wider'>{displayName}</h1>
-        <span className='invisible'>nothing</span>
+        <Link href="/"><span className='flex-1 text-white text-3xl font-tungsten tracking-wide cursor-pointer hover:text-gray-300 duration-300 transition-all'>Back</span></Link>
+        <h1 className='flex-auto w-full text-center text-yellow-300 text-7xl font-tungsten tracking-wider'>{displayName}</h1>
+        <span className='flex-1 invisible'>nothing</span>
       </div>
 
       <img className='h-64' src={selectedSkin.displayIcon} alt={`Image for ${selectedSkin.displayName}`} />
 
       <div className='flex flex-col items-center w-full'>
         <div className='flex flex-row justify-between items-center w-10/12'>
-          <span className='invisible w-64'>nothing</span>
+          <span className='w-64 invisible'>nothing</span>
           <h1 className='text-gray-200 font-light tracking-tight text-center text-5xl'>{selectedSkin.displayName}</h1>
           <button 
             onClick={() => dispatch(changeEquipedSkin({ key: displayName, value: selectedSkin.displayIcon })) }
@@ -81,15 +92,18 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
           </button>
         </div>
 
-        <Swiper
+        <SwiperMain
           className='w-10/12 my-6 px-6 select-none'
           spaceBetween={4}
           slidesPerView={11}
-          initialSlide={initialSlidePlace}
+          initialSlide={startSlideAt}
           allowTouchMove={false}
           loop={true}
           centeredSlides={true}
           slideToClickedSlide={true}
+          onInit={(core: SwiperCore) => {
+            swiperRef.current = core
+          }}
         >
           {
             skins.map((skin, index) => (
@@ -102,7 +116,7 @@ const SkinPicker = ({ info: { uuid, displayName, defaultSkinUuid, displayIcon, s
               </SwiperSlide>
             ))
           }
-        </Swiper>
+        </SwiperMain>
 
       </div>
 
