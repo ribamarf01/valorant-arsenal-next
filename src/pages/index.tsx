@@ -70,16 +70,6 @@ const Home = () => {
 
     </div>
 
-    <div className='absolute top-5 left-5'>
-      <Image
-        className='invert'
-        src={'/img/camera.png'}
-        width={32}
-        height={32}
-      />
-    </div>
-
-
   </>)
 
 }
