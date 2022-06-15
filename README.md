@@ -1,4 +1,4 @@
-# Wordle clone on VueJS!
+# Valorant Arsenal Maker in NextJS!
 
 ## 👀 Project Overview
 
