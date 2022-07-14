@@ -4,7 +4,7 @@
 
 - 😎 A webapp that tries to work as valorant collection and skin changer, the idea is to select yours favorite skins or current arsenal and download the image(camera button) to share with friends!
 - 👨‍💻 Uses React and NextJS to create the ui. Fetches data from the Valorant-API (link below). Uses redux to maintain state of the equiped skins. SwiperJS helps to make the slider to select skins.
-- 🔗 You can find this project live on: https://valorant-arsenal.vercel.app/.
+- 🔗 You can find this project live on: https://valorant-arsenal.ribamarf01.dev/.
 
 ## 🔥 Techs used
 
